@@ -1,10 +1,14 @@
-import React, { useState,useRef } from 'react'
+import React, { useState, useRef } from 'react'
 import { Accordion, Card, Button, Form, Row, Col, Image } from 'react-bootstrap'
 import Icon from '../assets/image/avtar.png'
 import ReactDOM from 'react-dom';
 import TaskList from './TaskList';
-export default function Task() {
-    
+import { connect } from 'react-redux';
+import * as actions from '../store/actions/index'
+function Task(props) {
+
+
+    console.log('kk', props);
     const [iteam, setIteam] = useState({
         task: '',
         date: '',
@@ -28,12 +32,13 @@ export default function Task() {
         setFormData((oldIteam) => {
             return [...oldIteam, iteam]
         })
-         let element = document.getElementById('uniqueCol')
-        ReactDOM.findDOMNode(element).classList.remove("show") 
+        props.addTask(data)
+        let element = document.getElementById('uniqueCol')
+        ReactDOM.findDOMNode(element).classList.remove("show")
 
-       // console.log('hh', reft.current.classList);
+        // console.log('hh', reft.current.classList);
 
-       /*  myRef.current.classList[0].remove("show"); */
+        /*  myRef.current.classList[0].remove("show"); */
 
         setIteam({
             task: '',
@@ -42,22 +47,22 @@ export default function Task() {
         })
     }
 
-    const removeItema = (keyVal) =>{
-        setFormData((preData)=>{
-            return  preData.filter((data,key)=>{
+    const removeItema = (keyVal) => {
+        setFormData((preData) => {
+            return preData.filter((data, key) => {
                 return key !== keyVal
             })
         })
     }
 
-    const updateInfo = (Updatedata,keyVal)=>{
-        data.splice(keyVal,1,Updatedata);
+    const updateInfo = (Updatedata, keyVal) => {
+        data.splice(keyVal, 1, Updatedata);
         setFormData(data);
         setIteam({
             task: '',
             data: '',
             time: ''
-        })  
+        })
     }
     return (
         <div>
@@ -66,10 +71,10 @@ export default function Task() {
                     <Card.Header>
                         TASK {data.length}
                         <Accordion.Toggle as={Button} style={{ float: 'right' }} variant="link" eventKey="0">
-                        <i className="bi bi-plus"></i>
+                            <i className="bi bi-plus"></i>
                         </Accordion.Toggle>
                     </Card.Header>
-                    <Accordion.Collapse  className='test'  id="uniqueCol" eventKey="0">
+                    <Accordion.Collapse className='test' id="uniqueCol" eventKey="0">
                         <Card.Body style={{ background: '#daeff8' }}>
                             <Form>
                                 <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -120,17 +125,31 @@ export default function Task() {
                             </Form>
                         </Card.Body>
                     </Accordion.Collapse>
-                    {data &&(
-                data.map((data,key)=>{
-                   return <TaskList data={data} keyVal={key} updateInfo={updateInfo} removeItema={removeItema} ></TaskList>
-                })
-            )
+                    {data && (
+                        data.map((data, key) => {
+                            return <TaskList data={data} keyVal={key} updateInfo={updateInfo} removeItema={removeItema} ></TaskList>
+                        })
+                    )
 
-            }
+                    }
                 </Card>
             </Accordion>
-            
-            
+
+
         </div>
     )
 }
+
+const mapStateToProps = (state) => {
+    console.log('ddd', state);
+
+
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        addTask: (data) => dispatch(actions.addTask(data))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Task)
