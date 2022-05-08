@@ -13,6 +13,8 @@ import Weather from './components/Weather/index'
 import ClassLifeCycle from './components/ClassLifeCycle/index'
 import LazyLoading from './components/LazyLoading/index'
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Callbacks from './components/Callbacks';
+import UseCallBack from './components/Callbacks/UseCallBack/index'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 function App() {
   return (
@@ -33,6 +35,11 @@ function App() {
             <Route path='/weather' exact component={Weather}></Route>
             <Route path='/class-life-cycle' exact component={ClassLifeCycle}></Route>
             <Route path='/lazy-loading' exact component={LazyLoading}></Route>
+            <Route path='/callback' exact component={Callbacks}></Route>
+            <Route path='/usecallback' exact component={UseCallBack}></Route>
+
+            
+            
             
             {/*<Route path='/student-managment' component={Task}></Route> */}
           </Switch>

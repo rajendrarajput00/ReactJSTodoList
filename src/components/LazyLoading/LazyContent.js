@@ -9,9 +9,9 @@ export default function LazyContent() {
         const formData = new FormData();
         formData.append('img',files[0])
 
-        axios().post("https://run.mocky.io/v3/c3b351b9-8609-4acf-843a-cb279701afd9",formData).then(res=>{
+       /*  axios().post("https://run.mocky.io/v3/c3b351b9-8609-4acf-843a-cb279701afd9",formData).then(res=>{
             console.log('res',res);
-        })
+        }) */
 
         console.log('fomrData',formData);
     }

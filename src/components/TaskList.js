@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Accordion, Card, Button, Form, Row, Col, Image } from 'react-bootstrap'
 import Icon from '../assets/image/avtar.png'
 import ReactDOM from 'react-dom';
+import axios from 'axios';
 export default function TaskList(props) {
     const [iteamList, setIteamList] = useState({
         task: '',
@@ -18,8 +19,26 @@ export default function TaskList(props) {
             [value.field]: value.value,
         }));
     }
-    const updateInfo = () => {
+
+    useEffect(async() => {
+      
+    let a = await axios.get('https://reacttodolist-b7d4d-default-rtdb.firebaseio.com/toodListData.json');
+
+    console.log('AAAA',a);
+
+      return () => {
+        
+      }
+    }, [])
+    
+
+
+    const updateInfo = async () => {
+       
+       await axios.post('https://reacttodolist-b7d4d-default-rtdb.firebaseio.com/toodListData.json',iteamList);
+        
         props.updateInfo(iteamList, props.keyVal);
+        
         let element = document.getElementById('uniqueCol' + props.keyVal)
         ReactDOM.findDOMNode(element).classList.remove("show")
     }
@@ -33,7 +52,14 @@ export default function TaskList(props) {
         props.removeItema(props.keyVal)
     }
 
+    const deleteTask = async() =>{
+        console.log('delete')
+        await axios.delete("https://reacttodolist-b7d4d-default-rtdb.firebaseio.com/toodListData",{data:{task:'www'}});
+    }
+
+
     return (
+
         <Accordion style={{ marginTop: "" }} /* defaultActiveKey="0" */ >
             <Card>
                 <Card.Header style={{ display: 'flex', alignItems: 'center', background: '#fff' }}>
@@ -106,10 +132,13 @@ export default function TaskList(props) {
                                 <Button style={{background:'#3CB371'}} onClick={() => updateInfo()} variant="primary">
                                     Save
                                 </Button>
+                                <button onClick={deleteTask}>delete</button>
 
                             </div>
 
                         </Form>
+
+                       
                     </Card.Body>
                 </Accordion.Collapse>
             </Card>

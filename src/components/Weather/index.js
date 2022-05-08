@@ -49,7 +49,7 @@ export default function Weather() {
 
     return (
         <div style={{ textAlign: 'center' }}>
-            <h4>Enter City Name To Check Weather</h4>
+            <h4>Enter City Name To Check Current Weather</h4>
             {data.message &&
 
                 <h5 style={{color:'red'}}>{data.message}</h5>

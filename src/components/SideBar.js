@@ -28,7 +28,8 @@ export default function SideBar() {
                 <NavLink to='/weather' activeClassName="selected">weather</NavLink>
                 <NavLink to='/class-life-cycle' activeClassName="selected">ClassLifeCycle</NavLink>
                 <NavLink to='/lazy-loading' activeClassName="selected">Lazy Loading</NavLink>
-
+                <NavLink to='/callback' activeClassName="selected">callback</NavLink>
+                <NavLink to='/usecallback' activeClassName="selected">usecallback</NavLink>
 
             {/*     <NavLink to='/class-life-cycle' activeClassName="selected">classLifeCyle</NavLink> */}
             </div>

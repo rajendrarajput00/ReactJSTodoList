@@ -7,8 +7,6 @@ import { connect } from 'react-redux';
 import * as actions from '../store/actions/index'
 function Task(props) {
 
-
-    console.log('kk', props);
     const [iteam, setIteam] = useState({
         task: '',
         date: '',
@@ -20,7 +18,7 @@ function Task(props) {
 
 
     const handleFieldChange = (value) => {
-        console.log('value', value);
+        //console.log('value', value);
         setIteam(prevState => ({
             ...prevState,
             [value.field]: value.value,
@@ -54,6 +52,7 @@ function Task(props) {
             })
         })
     }
+
 
     const updateInfo = (Updatedata, keyVal) => {
         data.splice(keyVal, 1, Updatedata);
@@ -141,7 +140,7 @@ function Task(props) {
 }
 
 const mapStateToProps = (state) => {
-    console.log('ddd', state);
+ //   console.log('ddd', state);
 
 
 }
